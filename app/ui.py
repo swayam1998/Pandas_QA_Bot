@@ -2,8 +2,8 @@ import gradio as gr
 import os
 import shutil
 import argparse
-from ..backend.main import PandasGptAgent, setup_logging
-from ..vector_db.vector_db import FeedbackDB
+from Pandas_QA_Bot.backend.main import PandasGptAgent, setup_logging
+from Pandas_QA_Bot.vector_db.vector_db import FeedbackDB
 import logging
 logger = logging.getLogger("Pandas_agent")
 # Argument parsing
@@ -14,7 +14,7 @@ args = parser.parse_args()
 
 setup_logging()
 
-agent_class = PandasGptAgent(api_key="sk-customergpt-dev-Otayp2OBMkZiJfRtDPilT3BlbkFJQ2u29xMhe5eT2QIKaOX4")
+agent_class = PandasGptAgent()
 feedback_db = FeedbackDB(positive_feedback_file='positive_feedback.db', negative_feedback_file='negative_feedback.db')
 global agent
 global last_prompt

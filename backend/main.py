@@ -1,18 +1,17 @@
-import os
 import pandas as pd
 import logging
 from langchain.agents.agent_types import AgentType
 from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
 from langchain_openai import ChatOpenAI
-
+from langsmith import traceable
+from dotenv import load_dotenv
 logger = logging.getLogger("Pandas_agent")
 
+load_dotenv()
 
 class PandasGptAgent:
-    def __init__(self, api_key: str):
-        self.api_key = "sk-customergpt-dev-Otayp2OBMkZiJfRtDPilT3BlbkFJQ2u29xMhe5eT2QIKaOX4"
-        os.environ['OPENAI_API_KEY'] = api_key
-
+    def __init__(self):
+        pass
     @staticmethod
     def fetch_column_descriptions(file_path: str) -> str:
         """Fetches column descriptions from a text file"""
@@ -67,6 +66,7 @@ class PandasGptAgent:
         return "\n\n".join(prompt_parts)
 
     @staticmethod
+    @traceable
     def chat_prompt(prompt, agent):
         logger.info(f"Prompt: {prompt}")
         response = agent.run(prompt)
