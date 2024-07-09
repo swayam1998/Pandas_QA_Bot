@@ -2,8 +2,8 @@ import gradio as gr
 import os
 import shutil
 import argparse
-from Pandas_QA_Bot.backend.main import PandasGptAgent, setup_logging
-from Pandas_QA_Bot.vector_db.vector_db import FeedbackDB
+from ..backend.main import PandasGptAgent, setup_logging
+from ..vector_db.vector_db import FeedbackDB
 import logging
 logger = logging.getLogger("Pandas_agent")
 # Argument parsing
