@@ -44,11 +44,11 @@ class FeedbackDB:
 
     def add_feedback(self, query, response, chain_of_thought, feedback_type):
         feedback_dict = {
-            "response": response.lower(),
+            "response": response.strip().lower(),
             "chain_of_thought": str(chain_of_thought).lower(),
             "timestamp": str(datetime.now()).lower(),
         }
-        document = Document(page_content=query, metadata=feedback_dict)
+        document = Document(page_content=query.strip().lower(), metadata=feedback_dict)
         
         if feedback_type == "positive":
             self.positive_db.add_documents([document])
