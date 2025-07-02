@@ -40,6 +40,8 @@ class FeedbackDB:
         self.positive_feedback_file = positive_feedback_file
         self.negative_feedback_file = negative_feedback_file
 
+
+
     def add_feedback(self, query, response, chain_of_thought, feedback_type):
         feedback_dict = {
             "response": response.strip().lower(),
@@ -50,8 +52,10 @@ class FeedbackDB:
         
         if feedback_type == "positive":
             self.positive_db.add_documents([document])
+            logging.info("Added positive feedback.")
         elif feedback_type == "negative":
             self.negative_db.add_documents([document])
+            logging.info("Added negative feedback.")
         else:
             raise ValueError("Feedback type must be 'positive' or 'negative'")
         
@@ -59,9 +63,6 @@ class FeedbackDB:
         self.negative_db.save_local(self.negative_feedback_file)
 
 
-        # Save the updated databa
-        self.positive_db.save_local(self.positive_feedback_file)
-        self.negative_db.save_local(self.negative_feedback_file)
 
     def search_similar_queries(self, query, k=3):
         embedding_vector = self.embeddings.embed_query(query)
